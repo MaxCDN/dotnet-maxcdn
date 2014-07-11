@@ -121,7 +121,6 @@
         string File = Console.ReadLine();
         files += "file[" + i + "]=" + File + "&";
     }
-
     api.Purge("/zones/pull.json/" + zoneId + "/cache", files);
     break;
     }
