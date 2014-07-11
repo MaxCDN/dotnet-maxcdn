@@ -16,7 +16,7 @@ This is a solution with two projects - .NET library and Console Application that
 ## Execute debugging process or release solution into installable pacjage by choosing BUILD -> Publish 
 ## Use following syntax to issue API calls
 
-//***** Account *****//
+//****** Account ******//
             //Address
             //Console.Write(api.Get("/account.json/address"));
 
