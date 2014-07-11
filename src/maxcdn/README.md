@@ -1,134 +1,130 @@
 #We're Hiring!
 Do you like building cool stuff?  Do APIs keep you up at night? We're looking for our next superstar hacker and you could be it. Interested? Check out our job posting on [stackoverflow](http://careers.stackoverflow.com/jobs/52171/obsessive-compulsive-full-web-stack-engineer-maxcdn?a=11CW0Jx0A&searchTerm=maxcdn).
 
-# MaxCDN REST Web Services NET Client
+# MaxCDN REST Web Services .NET Client
 
-This is a Visual Studio 2013 project using .NET 4.5 
-
-Make sure and obtain a proper account alias, consumer key, and consumer secret prior to using this library
+> Make sure and obtain a proper account `alias`, `consumer key`, and `consumer secret` prior to using this library.
 
 ## Usage
+```cs            
+    //Account
+    //Address
+    Console.Write(api.Get("/account.json/address"));
 
-//***** Account *****//
-            //Address
-            //Console.Write(api.Get("/account.json/address"));
+    //Edit
+    Console.Write("Enter property to edit (): \n");
+    string prop = Console.ReadLine();
+    Console.Write("Enter new value: \n");
+    string val = Console.ReadLine();
 
-            //Edit
-            //Console.Write("Enter property to edit (): \n");
-            //string prop = Console.ReadLine();
-            //Console.Write("Enter new value: \n");
-            //string val = Console.ReadLine();
+    api.Put("/account.json/", prop + "=" + val);
 
-            //api.Put("/account.json/", prop + "=" + val);
+    //***** Custom Domains ******//
+    //Create
+    Console.Write("Zone Id: \n");
+    int zoneId = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Custom Domain: \n");
+    string dat = Console.ReadLine();
 
-            //***** Custom Domains ******//
-            //Create
-            //Console.Write("Zone Id: \n");
-            //int zoneId = Convert.ToInt32(Console.ReadLine());
-            //Console.Write("Custom Domain: \n");
-            //string dat = Console.ReadLine();
-            
-            //api.Post("/zones/pull/" + zoneId + "/customdomains.json", dat="custom_domain=" + dat);
-            
-            //List
-            //Console.Write("Zone Id: \n");
-            //int zoneId = Convert.ToInt32(Console.ReadLine());
+    api.Post("/zones/pull/" + zoneId + "/customdomains.json", dat="custom_domain=" + dat);
 
-            //Console.Write(api.Get("/zones/pull/" + zoneId + "/customdomains.json"));
-            
-            //Edit
-            //Console.Write("Zone ID: \n");
-            //int zoneID = Convert.ToInt32(Console.ReadLine());
-            //Console.Write("Custom Doamin Id to Edit: \n");
-            //int cId = Convert.ToInt32(Console.ReadLine());
-            //Console.Write("New Value for this custom domain: \n");
-            //string cdname = Console.ReadLine();
-            //api.Put("/zones/pull/" + zoneID + "/customdomains.json/" + cId, "custom_domain=" + cdname);
+    //List
+    Console.Write("Zone Id: \n");
+    int zoneId = Convert.ToInt32(Console.ReadLine());
 
-            //***** Zones *****//
-            //New Zone
-            //Console.Write("Zone Name: \n");
-            //string ZoneName = Console.ReadLine();
-            //Console.Write("Origin URL (starting with http://): \n");
-            //string url = Console.ReadLine();
+    Console.Write(api.Get("/zones/pull/" + zoneId + "/customdomains.json"));
 
-            //api.Post("/zones/pull.json", "url=" + url + "&name=" + ZoneName);
+    //Edit
+    Console.Write("Zone ID: \n");
+    int zoneID = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Custom Doamin Id to Edit: \n");
+    int cId = Convert.ToInt32(Console.ReadLine());
+    Console.Write("New Value for this custom domain: \n");
+    string cdname = Console.ReadLine();
+    api.Put("/zones/pull/" + zoneID + "/customdomains.json/" + cId, "custom_domain=" + cdname);
 
-            //List
-            //Console.Write(api.Get("/zones/pull.json"));
+    //***** Zones *****//
+    //New Zone
+    Console.Write("Zone Name: \n");
+    string ZoneName = Console.ReadLine();
+    Console.Write("Origin URL (starting with http://): \n");
+    string url = Console.ReadLine();
 
-            //Edit
-            //Console.Write("Zone id to edit: \n");
-            //int zoneId = Convert.ToInt32(Console.ReadLine());
-            //Console.Write("Property to edit/change (url/compression/...): \n");
-            //string prop = Console.ReadLine();
-            //Console.Write("New value: \n");
-            //string val = Console.ReadLine();
+    api.Post("/zones/pull.json", "url=" + url + "&name=" + ZoneName);
 
-            //api.Put("/zones/pull.json/" + zoneId, prop + "=" + val);
+    //List
+    Console.Write(api.Get("/zones/pull.json"));
 
-            //Summary
-            //Console.Write(api.Get("/zones.json/summary"));
+    //Edit
+    Console.Write("Zone id to edit: \n");
+    int zoneId = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Property to edit/change (url/compression/...): \n");
+    string prop = Console.ReadLine();
+    Console.Write("New value: \n");
+    string val = Console.ReadLine();
 
-            //Count
-            //Console.Write("Zone type to count (pull, push, vod): \n");
-            //string zType = Console.ReadLine();
-            //Console.Write(api.Get("/zones/" + zType + ".json/count"));
-            
-            //Create User
-            //Console.Write("User First Name: \n");
-            //string fname = Console.ReadLine();
-            //Console.Write("User Last Name: \n");
-            //string lname = Console.ReadLine();
-            //Console.Write("User email: \n");
-            //string email = Console.ReadLine();
-            //Console.Write("Password: \n");
-            //string pwd = Console.ReadLine();
+    api.Put("/zones/pull.json/" + zoneId, prop + "=" + val);
 
-            //api.Post("/users.json", "firstname=" + fname + "&lastname=" + lname + "&password=" + pwd + "&email=" + email);
+    //Summary
+    Console.Write(api.Get("/zones.json/summary"));
 
-            //List
-            //Console.Write(api.Get("/users.json"));
+    //Count
+    Console.Write("Zone type to count (pull, push, vod): \n");
+    string zType = Console.ReadLine();
+    Console.Write(api.Get("/zones/" + zType + ".json/count"));
 
-            //Edit
-            //Console.Write("Enter user ID to edit: \n");
-            //int uid = Convert.ToInt32(Console.ReadLine());
-            //Console.Write("Enter property to edit: \n");
-            //string prop = Console.ReadLine();
-            //Console.Write("New value: \n");
-            //string val = Console.ReadLine();
+    //Create User
+    Console.Write("User First Name: \n");
+    string fname = Console.ReadLine();
+    Console.Write("User Last Name: \n");
+    string lname = Console.ReadLine();
+    Console.Write("User email: \n");
+    string email = Console.ReadLine();
+    Console.Write("Password: \n");
+    string pwd = Console.ReadLine();
 
-            //api.Put("/users.json/" + uid + "/", prop + "=" + val);
+    api.Post("/users.json", "firstname=" + fname + "&lastname=" + lname + "&password=" + pwd + "&email=" + email);
 
-            //***** Manage Cache *****//
-            //Console.Write("Zone ID: \n");
-            //int zoneId = Convert.ToInt32(Console.ReadLine());
-            //Console.Write("What do you want to purge? (all/file)");
-            //string ptype = Console.ReadLine();
-            //switch (ptype){
-            //    case "all":
-            //    api.Delete("/zones/pull.json/" + zoneId + "/cache");
-            //    break;
-            //    case "file":
-            //    Console.Write("Enter File Path to Purge (relative path): \n");
-            //    string file = Console.ReadLine();
-            //    
-            //    api.Purge("/zones/pull.json/" + zoneId + "/cache", file);
-            //    break;
-            //    case "fileS":
-            //    Console.Write("How Many? \n");
-            //    int loop = Convert.ToInt32(Console.ReadLine());
-            //    Console.Write("Enter File Paths to Purge (relative paths): \n");
-            //    string files = "";
-            //    for (int i = 0; i < loop; i++)
-            //    {
-            //        Console.Write(i + 1 + ": \n");
-            //        string File = Console.ReadLine();
-            //        files += "file[" + i + "]=" + File + "&";
-            //    }
-            //    
-            //    api.Purge("/zones/pull.json/" + zoneId + "/cache", files);
-            //    break;
-            // }
+    //List
+    Console.Write(api.Get("/users.json"));
 
-           //} 
+    //Edit
+    Console.Write("Enter user ID to edit: \n");
+    int uid = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Enter property to edit: \n");
+    string prop = Console.ReadLine();
+    Console.Write("New value: \n");
+    string val = Console.ReadLine();
+
+    api.Put("/users.json/" + uid + "/", prop + "=" + val);
+
+    //***** Manage Cache *****//
+    Console.Write("Zone ID: \n");
+    int zoneId = Convert.ToInt32(Console.ReadLine());
+    Console.Write("What do you want to purge? (all/file)");
+    string ptype = Console.ReadLine();
+    switch (ptype){
+    case "all":
+    api.Delete("/zones/pull.json/" + zoneId + "/cache");
+    break;
+    case "file":
+    Console.Write("Enter File Path to Purge (relative path): \n");
+    string file = Console.ReadLine();
+
+    api.Purge("/zones/pull.json/" + zoneId + "/cache", file);
+    break;
+    case "fileS":
+    Console.Write("How Many? \n");
+    int loop = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Enter File Paths to Purge (relative paths): \n");
+    string files = "";
+    for (int i = 0; i < loop; i++)
+    {
+        Console.Write(i + 1 + ": \n");
+        string File = Console.ReadLine();
+        files += "file[" + i + "]=" + File + "&";
+    }
+    api.Purge("/zones/pull.json/" + zoneId + "/cache", files);
+    break;
+    }
+```
