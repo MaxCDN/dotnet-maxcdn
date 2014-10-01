@@ -162,6 +162,7 @@ namespace MaxCDN
         /// <returns>Returns a Url encoded string</returns>
         protected string UrlEncode(string value)
         {
+
             StringBuilder result = new StringBuilder();
 
             foreach (char symbol in value)
@@ -262,7 +263,7 @@ namespace MaxCDN
                 normalizedUrl += ":" + url.Port;
             }
             normalizedUrl += url.AbsolutePath;
-            normalizedRequestParameters = NormalizeRequestParameters(parameters);
+            normalizedRequestParameters = Utils.UpperCaseEncode(NormalizeRequestParameters(parameters));
 
             StringBuilder signatureBase = new StringBuilder();
             signatureBase.AppendFormat("{0}&", httpMethod.ToUpper());
@@ -320,7 +321,6 @@ namespace MaxCDN
                     return HttpUtility.UrlEncode(string.Format("{0}&{1}", consumerSecret, tokenSecret));
                 case SignatureTypes.HMACSHA1:
                     string signatureBase = GenerateSignatureBase(url, consumerKey, token, tokenSecret, httpMethod, timeStamp, nonce, HMACSHA1SignatureType, out normalizedUrl, out normalizedRequestParameters);
-
                     HMACSHA1 hmacsha1 = new HMACSHA1();
                     hmacsha1.Key = Encoding.ASCII.GetBytes(string.Format("{0}&{1}", UrlEncode(consumerSecret), string.IsNullOrEmpty(tokenSecret) ? "" : UrlEncode(tokenSecret)));
 
@@ -353,5 +353,20 @@ namespace MaxCDN
             return random.Next(123400, 9999999).ToString();
         }
 
+    }
+    public static class Utils {
+        public static string UpperCaseEncode(this string s)
+        {
+            char[] temp = s.ToCharArray();
+            for (int i = 0; i < temp.Length - 2; i++)
+            {
+                if (temp[i] == '%')
+                {
+                    temp[i + 1] = char.ToUpper(temp[i + 1]);
+                    temp[i + 2] = char.ToUpper(temp[i + 2]);
+                }
+            }
+            return new string(temp);
+        }
     }
 }
