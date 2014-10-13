@@ -15,7 +15,7 @@ namespace MaxCDN
         private string _alias = "";
         private int _requestTimeout = 30;
 
-        private const string _netDNABaseAddress = "https://rws.maxcdn.com";
+        private const string _MaxCDNBaseAddress = "https://rws.maxcdn.com";
 
         public Api(string alias, string consumerKey, string consumerSecret, int requestTimeout = 30)
         {
@@ -150,7 +150,7 @@ namespace MaxCDN
         private string GenerateOAuthRequestUrl(string url, string method)
         {
             Uri uri;
-            Uri.TryCreate(_netDNABaseAddress + "/" + _alias + url, UriKind.Absolute, out uri);
+            Uri.TryCreate(_MaxCDNBaseAddress + "/" + _alias + url, UriKind.Absolute, out uri);
 
             var normalizedUrl = "";
             var normalizedParams = "";
