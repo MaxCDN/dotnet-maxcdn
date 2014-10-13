@@ -79,26 +79,52 @@ namespace MaxCDN
         //PUT requests handler
         public bool Put(string url, dynamic data)
         {
-            var requestUrl = GenerateOAuthRequestUrl(url, "PUT");
+            char[] enc = System.Web.HttpUtility.UrlEncode(data).ToCharArray();
 
+            for (int i = 0; i < enc.Length - 2; i++)
+            {
+                if (enc[i] == '%')
+                {
+                    enc[i + 1] = char.ToUpper(enc[i + 1]);
+                    enc[i + 2] = char.ToUpper(enc[i + 2]);
+                }
+            }
+
+            string encfinal = new string(enc);
+            data = encfinal;
+            data = data.Replace("%3D", "=").Replace("%26", "&");
+
+            var requestUrl = GenerateOAuthRequestUrl(url, "PUT");
             var request = WebRequest.Create(requestUrl);
             request.Method = "PUT";
-
             byte[] byteArray = Encoding.UTF8.GetBytes(data);
             request.ContentType = "application/json";
             request.ContentLength = byteArray.Length;
-
             var dataStream = request.GetRequestStream();
             dataStream.Write(byteArray, 0, byteArray.Length);
             dataStream.Close();
-
             var response = request.GetResponse();
-
-            return ((HttpWebResponse)response).StatusCode == HttpStatusCode.OK;            
+            return ((HttpWebResponse)response).StatusCode == HttpStatusCode.OK;
         }
         //POST request handler
         public bool Post(string url, dynamic data)
         {
+            char[] enc = System.Web.HttpUtility.UrlEncode(data).ToCharArray();
+
+            for (int i = 0; i < enc.Length - 2; i++)
+            {
+                if (enc[i] == '%')
+                {
+                    enc[i + 1] = char.ToUpper(enc[i + 1]);
+                    enc[i + 2] = char.ToUpper(enc[i + 2]);
+                }
+            }
+
+            string encfinal = new string(enc);
+            data = encfinal;
+            data = data.Replace("%3D", "=").Replace("%26", "&");
+
+
             var requestUrl = GenerateOAuthRequestUrl(url, "POST");
 
             var request = WebRequest.Create(requestUrl);
