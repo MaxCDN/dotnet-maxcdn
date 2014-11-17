@@ -59,7 +59,7 @@ namespace MaxCDN
 
             string encfinal = new string(enc);
 
-            var response = GetWebResponse(url + "?" + encfinal.Replace("%3D", "=").Replace("%26", "&"), "DELETE");
+            var response = GetWebResponse(url + "?" + encfinal.Replace("%5D%3D", "%5D=").Replace("%26file%5B", "&file%5B"), "DELETE");
 
             return ((HttpWebResponse)response).StatusCode == HttpStatusCode.OK;
         }
