@@ -64,6 +64,34 @@ Do you like building cool stuff?  Do APIs keep you up at night? We're looking fo
     string val = Console.ReadLine();
 
     api.Put("/zones/pull.json/" + zoneId, prop + "=" + val);
+    
+    //SSL
+    //Install
+    var cert = "";
+    var key = "";
+    Console.Write("Zone id: \n");
+    int zoneId = Convert.ToInt32(Console.ReadLine());
+    using (StreamReader sr = new StreamReader("cert.txt"))
+    {
+        cert = sr.ReadToEnd();               
+    }
+    using (StreamReader sr = new StreamReader("key.txt"))
+    {
+        key = sr.ReadToEnd();
+    }
+
+
+    var dat = "";
+    cert = "-----BEGIN CERTIFICATE-----\n" + cert + "\n-----END CERTIFICATE-----\n";
+    key = "-----BEGIN RSA PRIVATE KEY-----\n" + key + "\n-----END RSA PRIVATE KEY-----\n";
+    api.Post("/zones/pull/" + zoneId + "/ssl.json", dat="ssl_crt=" + cert + "&ssl_key=" + key);
+
+    //Edit
+    var dat = "";
+    cert = "-----BEGIN CERTIFICATE-----\n" + cert + "\n-----END CERTIFICATE-----\n";
+    key = "-----BEGIN RSA PRIVATE KEY-----\n" + key + "\n-----END RSA PRIVATE KEY-----\n";
+    api.Put("/zones/pull/" + zoneId + "/ssl.json", dat="ssl_crt=" + cert + "&ssl_key=" + key);
+
 
     //Summary
     Console.Write(api.Get("/zones.json/summary"));
