@@ -134,7 +134,7 @@
     case "file":
     Console.Write("Enter File Path to Purge (relative path): \n");
     string file = Console.ReadLine();
-
+    file = "file=" + file;
     api.Purge("/zones/pull.json/" + zoneId + "/cache", file);
     break;
     case "fileS":
