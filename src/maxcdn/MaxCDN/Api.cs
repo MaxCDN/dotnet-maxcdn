@@ -26,14 +26,12 @@ namespace MaxCDN
         public dynamic Get(string url, bool debug = false)
         {            
             var requestUrl = GenerateOAuthRequestUrl(url, "GET");
-
-            var request = new ApiWebClient(_requestTimeout);            
+            var request = new ApiWebClient(_requestTimeout);
+            request.Headers.Add("user-agent","MaxCDN dot-net API Client");
             var response = request.DownloadString(requestUrl);
-
             var result = response;
             if (debug)
                 DumpObject(result);
-
             return result;
         }
 
@@ -68,10 +66,9 @@ namespace MaxCDN
         private WebResponse GetWebResponse(string url, string method)
         {
             var requestUrl = GenerateOAuthRequestUrl(url, method);
-
-            var request = WebRequest.Create(requestUrl);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUrl);
             request.Method = method;
-
+            request.UserAgent = "MaxCDN dot-net API Client";
             var response = request.GetResponse();
             return response;
         }
