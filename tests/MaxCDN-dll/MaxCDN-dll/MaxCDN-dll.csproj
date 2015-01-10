@@ -50,6 +50,7 @@
     <Compile Include="INIT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purge.cs" />
+    <Compile Include="SSL.cs" />
     <Compile Include="Zones.cs" />
   </ItemGroup>
   <ItemGroup>
