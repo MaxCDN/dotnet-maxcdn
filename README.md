@@ -1,6 +1,8 @@
 # MaxCDN REST Web Services .NET Client
 
 > Make sure and obtain a proper account `alias`, `consumer key`, and `consumer secret` prior to using this library.
+> Debugging supported by appending "true" flag at the end of the call (api.Get("/account.json/address, true");)
+> Garbage collector enabled by default
 
 ## Usage
 ```cs            
